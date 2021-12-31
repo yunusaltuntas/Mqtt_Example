@@ -1,11 +1,21 @@
 version: "3"
 services:
- mqtt:
+  subscriber:
+    container_name: subscriber
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bash -c "cd app && python subscriber.py"
+    volumes:
+      - ./:/app
+    links:
+      - mqtt
+  mqtt:
       image: toke/mosquitto
-      network_mode: bridge
+#      network_mode: bridge
       container_name: mqtt
       expose:
         - 1883
       ports:
-        - 1883:1883
+        - "1883:1883"
       restart: unless-stopped
