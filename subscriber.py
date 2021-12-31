@@ -4,7 +4,7 @@ broker = "localhost"
 # port
 port = 1883
 # time to live
-timelive = 60
+time_live = 60
 
 
 def on_connect(client, userdata, flags, rc):
@@ -17,7 +17,7 @@ def on_message(client, userdata, msg):
 
 
 client = mqtt.Client()
-client.connect(broker, port, timelive)
+client.connect(broker, port, time_live)
 client.on_connect = on_connect
 client.on_message = on_message
 client.loop_forever()
