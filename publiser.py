@@ -16,14 +16,20 @@ def on_publish(client, userdata, result):
 client = paho.Client("admin")
 client.on_publish = on_publish
 client.connect(broker, port)
-global d
-for i in range(20):
-    d = random.randint(1, 5)
 
-    # telemetry to send
-    message = "Device 1 : Data " + str(i)
-time.sleep(d)
 
-# publish message
-ret = client.publish("/data", "message")
-print("Stopped...")
+def main():
+    for i in range(20):
+        d = random.randint(1, 5)
+
+        # telemetry to send
+        message = "Device 1 : Data " + str(i)
+        time.sleep(d)
+
+        # publish message
+        ret = client.publish("/data", message)
+    print("Stopped...")
+
+
+if __name__ == "__main__":
+    main()
